@@ -13,7 +13,7 @@
 3) App is very slow 
 4) Minor other issues
 
-To be implemented- 
+### To be implemented- 
 1) instead of printing html, user will be able to download html file on clicking export html button
 2) Better working with App-provider and Client-Router
 3) Delete Template Option to be Added
