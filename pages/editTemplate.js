@@ -6,10 +6,14 @@ import {
   Layout,
   Page,
   Button,
+  Loading,
+  Frame,
+  Spinner,
   SettingToggle,
   TextStyle,
   Stack,
   TextField,
+  EmptyState,
 } from "@shopify/polaris";
 import CreateTemplate from "../components/createTemplate";
 import { Redirect } from "@shopify/app-bridge/actions";
@@ -33,14 +37,18 @@ async function getTemplateData(templateID) {
 class EditTemplate extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { design: null, template: null };
+    this.state = { design: null, template: null, isFetching: true };
     this.saveDesign = this.saveDesign.bind(this);
   }
   async componentDidMount() {
     const template = await getTemplateData(this.props.templateID);
     console.log(template);
     if (template) {
-      this.setState({ template: template, design: template.design });
+      this.setState({
+        template: template,
+        design: template.design,
+        isFetching: false,
+      });
     }
   }
   async saveDesign(updatedDesign) {
@@ -75,20 +83,30 @@ class EditTemplate extends React.Component {
     return (
       <Page>
         <Layout>
-          <Button
-            primary
-            onClick={() => {
-              redirectToDashBoard(shop_name);
-            }}
-          >
-            Back to DashBoard
-          </Button>
-          <CreateTemplate
-            savedDesign={this.state.design}
-            saveUpdatedDesign={(design) => {
-              this.saveDesign(design);
-            }}
-          />
+          <Layout.Section>
+            <Button
+              primary
+              onClick={() => {
+                redirectToDashBoard(shop_name);
+              }}
+            >
+              Back to DashBoard
+            </Button>
+          </Layout.Section>
+          <Layout.Section>
+            {this.state.isFetching ? (
+              <Frame>
+                <Loading />
+              </Frame>
+            ) : (
+              <CreateTemplate
+                savedDesign={this.state.design}
+                saveUpdatedDesign={(design) => {
+                  this.saveDesign(design);
+                }}
+              />
+            )}
+          </Layout.Section>
         </Layout>
       </Page>
     );
