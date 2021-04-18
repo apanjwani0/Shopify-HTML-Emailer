@@ -14,6 +14,7 @@
 2. ~~Saving design with uploaded image not tested yet~~ :white_check_mark:
 3. App is very slow
 4. Minor other issues
+5. Saving Design creates infinite triggers (**new**)
 
 ### To be implemented-
 
