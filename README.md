@@ -17,7 +17,7 @@
 
 ### To be implemented-
 
-1. instead of printing html, user will be able to download html file on clicking export html button
+1. ~~Instead of printing html, user will be able to download html file on clicking export html button~~ :white_check_mark:
 2. Better working with App-provider and Client-Router
 3. Delete Template Option to be Added
 4. Send email functionality to be added
