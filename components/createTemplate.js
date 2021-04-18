@@ -24,6 +24,16 @@ function CreateTemplate(props) {
   const exportHtml = () => {
     emailEditorRef.current.editor.exportHtml((data) => {
       const { design, html } = data;
+
+      var blobData = new Blob([html], { type: "text/html" });
+      const url = window.URL.createObjectURL(blobData);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `template.html`);
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+
       console.log("exportHtml", html);
       alert("Output HTML has been logged in your developer console.");
     });
